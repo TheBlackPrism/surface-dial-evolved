@@ -193,10 +193,12 @@ export class ActionRunner {
      * @param {object} params parameters
      * @param {function(string): void} params.log debug logging
      * @param {function(string): void} params.setMode switches the rotate mode of the current profile
+     * @param {function(): void} params.openPreferences opens the preferences of this extension
      */
-    constructor({log, setMode}) {
+    constructor({log, setMode, openPreferences}) {
         this._log = log;
         this._setMode = setMode;
+        this._openPreferences = openPreferences;
 
         const seat = Clutter.get_default_backend().get_default_seat();
         this._keyboard = seat.create_virtual_device(Clutter.InputDeviceType.KEYBOARD_DEVICE);
@@ -385,6 +387,9 @@ export class ActionRunner {
             break;
         case 'overview':
             Main.overview.toggle();
+            break;
+        case 'preferences':
+            this._openPreferences();
             break;
         case 'night-light': {
             const settings = new Gio.Settings({schema_id: 'org.gnome.settings-daemon.plugins.color'});

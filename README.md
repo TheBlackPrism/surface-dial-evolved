@@ -23,7 +23,7 @@ context-aware actions, rotate modes per application, and haptic feedback.
 | Files | Back, Forward, Parent Folder, New Folder, Hidden Files, Grid/List View | scroll · zoom — click: Back |
 | GIMP | Undo, Redo, Paintbrush, Eraser, Swap Colors, Fit Image | brush size · zoom · scroll — click: Undo |
 | LibreOffice | Undo, Redo, Bold, Italic, Underline, Save | scroll · zoom — click: Undo |
-| everything else | Play/Pause, Next, Previous, Mute, Screenshot, Night Light, Dark Style, Overview | volume · scroll — click: Play/Pause |
+| everything else | Play/Pause, Next, Previous, Mute, Screenshot, Dial Settings, Dark Style, Overview | volume · scroll — click: Play/Pause |
 
 ## How it works
 
@@ -115,7 +115,7 @@ profiles are added and win over the built-in ones.
 | `intellij` | `id`: IntelliJ action id, or `dial.rerunHotSwap` |
 | `mpris` | `method`: `PlayPause`, `Next`, `Previous`, `Seek` (+`seconds`), `ToggleShuffle`; optional `player` |
 | `mute` | — |
-| `shell` | `call`: `screenshot`, `overview`, `night-light`, `dark-style` |
+| `shell` | `call`: `screenshot`, `overview`, `preferences` (this extension's settings), `night-light`, `dark-style` |
 | `command` | `argv`: program and arguments |
 | `mode` | `mode`: id of a rotate mode to switch to |
 | `sequence` | `actions`: run in order; `delay` actions (`ms`) wait in between |

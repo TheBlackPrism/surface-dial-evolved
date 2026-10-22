@@ -71,6 +71,7 @@ export default class SurfaceDialExtension extends Extension {
         this._runner = new ActionRunner({
             log: msg => this._debug(msg),
             setMode: id => this._switchModeTo(id),
+            openPreferences: () => this.openPreferences(),
         });
         this._haptics = new Haptics(
             this.dir.get_child('helpers').get_child('dial-haptics.py').get_path(),

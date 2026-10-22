@@ -9,7 +9,7 @@
         {"label": "Previous", "icon": "media-skip-backward-symbolic", "action": {"type": "mpris", "method": "Previous"}},
         {"label": "Mute", "icon": "audio-volume-muted-symbolic", "action": {"type": "mute"}},
         {"label": "Screenshot", "icon": "camera-photo-symbolic", "action": {"type": "shell", "call": "screenshot"}},
-        {"label": "Night Light", "icon": "night-light-symbolic", "action": {"type": "shell", "call": "night-light"}},
+        {"label": "Dial Settings", "icon": "preferences-system-symbolic", "action": {"type": "shell", "call": "preferences"}},
         {"label": "Dark Style", "icon": "weather-clear-night-symbolic", "action": {"type": "shell", "call": "dark-style"}},
         {"label": "Overview", "icon": "view-grid-symbolic", "action": {"type": "shell", "call": "overview"}}
       ],
