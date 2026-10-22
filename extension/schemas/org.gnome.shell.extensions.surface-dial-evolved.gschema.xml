@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+  <schema id="org.gnome.shell.extensions.surface-dial-evolved"
+          path="/org/gnome/shell/extensions/surface-dial-evolved/">
+    <key name="hold-time" type="u">
+      <default>500</default>
+      <range min="150" max="2000"/>
+      <summary>Hold time</summary>
+      <description>Milliseconds the dial has to be held down to open the ring.</description>
+    </key>
+    <key name="steps-per-turn" type="u">
+      <default>36</default>
+      <range min="12" max="120"/>
+      <summary>Steps per turn</summary>
+      <description>Number of steps (and haptic clicks) in one full turn of the dial.</description>
+    </key>
+    <key name="ring-size" type="u">
+      <default>300</default>
+      <range min="200" max="600"/>
+      <summary>Ring diameter</summary>
+      <description>Diameter of the ring overlay in logical pixels.</description>
+    </key>
+    <key name="ring-timeout" type="u">
+      <default>4000</default>
+      <range min="1000" max="30000"/>
+      <summary>Ring timeout</summary>
+      <description>Milliseconds without input after which the open ring closes.</description>
+    </key>
+    <key name="haptics" type="b">
+      <default>true</default>
+      <summary>Haptic feedback</summary>
+      <description>Let the dial tick on every step while the ring is open.</description>
+    </key>
+    <key name="debug" type="b">
+      <default>false</default>
+      <summary>Debug logging</summary>
+      <description>Log raw dial events and executed actions to the journal.</description>
+    </key>
+  </schema>
+</schemalist>

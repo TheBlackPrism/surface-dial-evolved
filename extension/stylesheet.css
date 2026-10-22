@@ -1,0 +1,36 @@
+/* Surface Dial Evolved */
+
+.sde-accent { color: -st-accent-color; }
+
+.sde-ring-icon { color: rgba(255, 255, 255, 0.82); }
+.sde-ring-icon:selected { color: -st-accent-fg-color; }
+.sde-light .sde-ring-icon { color: rgba(0, 0, 0, 0.7); }
+.sde-light .sde-ring-icon:selected { color: -st-accent-fg-color; }
+
+.sde-hub { spacing: 4px; }
+.sde-hub-app { icon-size: 28px; }
+.sde-hub-label { font-weight: bold; font-size: 11pt; color: #ffffff; text-align: center; }
+.sde-hub-hint { font-size: 8pt; color: rgba(255, 255, 255, 0.55); }
+.sde-light .sde-hub-label { color: #1e1e22; }
+.sde-light .sde-hub-hint { color: rgba(0, 0, 0, 0.5); }
+
+.sde-toast {
+  background-color: rgba(30, 30, 34, 0.94);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  color: #ffffff;
+  padding: 8px 16px;
+  spacing: 10px;
+}
+.sde-toast.sde-light {
+  background-color: rgba(250, 250, 252, 0.96);
+  border-color: rgba(0, 0, 0, 0.08);
+  color: #1e1e22;
+}
+.sde-toast-icon { icon-size: 18px; }
+.sde-toast-label { font-weight: bold; }
+.sde-toast-dots { spacing: 5px; }
+.sde-toast-dot { width: 6px; height: 6px; border-radius: 3px; background-color: rgba(255, 255, 255, 0.3); }
+.sde-light .sde-toast-dot { background-color: rgba(0, 0, 0, 0.2); }
+.sde-toast-dot:current, .sde-light .sde-toast-dot:current { width: 14px; background-color: -st-accent-color; }

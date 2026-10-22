@@ -1,0 +1,228 @@
+{
+  "profiles": [
+    {
+      "id": "default",
+      "name": "Desktop",
+      "ring": [
+        {"label": "Play / Pause", "icon": "media-playback-start-symbolic", "action": {"type": "mpris", "method": "PlayPause"}},
+        {"label": "Next", "icon": "media-skip-forward-symbolic", "action": {"type": "mpris", "method": "Next"}},
+        {"label": "Previous", "icon": "media-skip-backward-symbolic", "action": {"type": "mpris", "method": "Previous"}},
+        {"label": "Mute", "icon": "audio-volume-muted-symbolic", "action": {"type": "mute"}},
+        {"label": "Screenshot", "icon": "camera-photo-symbolic", "action": {"type": "shell", "call": "screenshot"}},
+        {"label": "Night Light", "icon": "night-light-symbolic", "action": {"type": "shell", "call": "night-light"}},
+        {"label": "Dark Style", "icon": "weather-clear-night-symbolic", "action": {"type": "shell", "call": "dark-style"}},
+        {"label": "Overview", "icon": "view-grid-symbolic", "action": {"type": "shell", "call": "overview"}}
+      ],
+      "modes": [
+        {"id": "volume", "label": "Volume", "icon": "audio-volume-high-symbolic", "rotate": {"type": "volume"}},
+        {"id": "scroll", "label": "Scroll", "icon": "input-mouse-symbolic", "rotate": {"type": "scroll"}}
+      ],
+      "click": {"type": "mpris", "method": "PlayPause"}
+    },
+    {
+      "id": "intellij",
+      "name": "IntelliJ IDEA",
+      "match": {"appIds": ["intellij-idea_intellij-idea", "intellij-idea-ultimate_intellij-idea-ultimate", "jetbrains-idea"], "wmClass": "^jetbrains-idea"},
+      "ring": [
+        {"label": "Debug with HotSwap", "icon": "dial-hotswap-debug-symbolic", "action": {"type": "intellij", "id": "HotSwap.debug.toolbar", "fallback": {"type": "intellij", "id": "HotSwap.debug"}}},
+        {"label": "Rerun HotSwap Debug", "icon": "dial-hotswap-rerun-symbolic", "action": {"type": "intellij", "id": "dial.rerunHotSwap"}},
+        {"label": "Reload Changed Classes", "icon": "dial-reload-classes-symbolic", "action": {"type": "intellij", "id": "Hotswap"}},
+        {"label": "Stop", "icon": "media-playback-stop-symbolic", "action": {"type": "intellij", "id": "Stop"}},
+        {"label": "Sync All Maven Projects", "icon": "dial-maven-sync-symbolic", "action": {"type": "intellij", "id": "Maven.Reimport"}},
+        {"label": "Recompile File", "icon": "dial-recompile-symbolic", "action": {"type": "intellij", "id": "Compile"}},
+        {"label": "Build Project", "icon": "dial-build-symbolic", "action": {"type": "intellij", "id": "CompileDirty"}},
+        {"label": "Reformat Code", "icon": "format-justify-left-symbolic", "action": {"type": "intellij", "id": "ReformatCode"}}
+      ],
+      "modes": [
+        {"id": "scroll", "label": "Scroll", "icon": "input-mouse-symbolic", "rotate": {"type": "scroll"}},
+        {"id": "methods", "label": "Methods", "icon": "dial-methods-symbolic",
+         "cw": {"type": "intellij", "id": "MethodDown"}, "ccw": {"type": "intellij", "id": "MethodUp"}},
+        {"id": "errors", "label": "Problems", "icon": "dialog-warning-symbolic",
+         "cw": {"type": "intellij", "id": "GotoNextError"}, "ccw": {"type": "intellij", "id": "GotoPreviousError"}}
+      ],
+      "click": {"type": "intellij", "id": "RecentFiles"}
+    },
+    {
+      "id": "sourcegit",
+      "name": "SourceGit",
+      "match": {"appIds": ["sourcegit"], "wmClass": "sourcegit"},
+      "ring": [
+        {"label": "Fetch", "icon": "dial-git-fetch-symbolic", "action": {"type": "keys", "keys": "ctrl+Down"}},
+        {"label": "Pull", "icon": "dial-git-pull-symbolic", "action": {"type": "keys", "keys": "ctrl+shift+Down"}},
+        {"label": "Push", "icon": "dial-git-push-symbolic", "action": {"type": "keys", "keys": "ctrl+shift+Up"}},
+        {"label": "Commit & Push", "icon": "mail-send-symbolic", "action": {"type": "keys", "keys": "ctrl+alt+Return"}},
+        {"label": "New Branch", "icon": "dial-git-branch-symbolic", "action": {"type": "keys", "keys": "ctrl+b"}},
+        {"label": "Local Changes", "icon": "document-edit-symbolic", "action": {"type": "keys", "keys": "ctrl+2"}},
+        {"label": "Refresh", "icon": "view-refresh-symbolic", "action": {"type": "keys", "keys": "F5"}},
+        {"label": "Command Palette", "icon": "edit-find-symbolic", "action": {"type": "keys", "keys": "ctrl+shift+p"}}
+      ],
+      "modes": [
+        {"id": "scroll", "label": "Scroll", "icon": "input-mouse-symbolic", "rotate": {"type": "scroll"}},
+        {"id": "tabs", "label": "Tabs", "icon": "dial-tabs-symbolic",
+         "cw": {"type": "keys", "keys": "ctrl+Tab"}, "ccw": {"type": "keys", "keys": "ctrl+shift+Tab"}}
+      ],
+      "click": {"type": "keys", "keys": "F5"}
+    },
+    {
+      "id": "firefox",
+      "name": "Firefox",
+      "match": {"appIds": ["firefox_firefox", "firefox", "org.mozilla.firefox"], "wmClass": "^firefox"},
+      "ring": [
+        {"label": "Back", "icon": "go-previous-symbolic", "action": {"type": "keys", "keys": "alt+Left"}},
+        {"label": "Forward", "icon": "go-next-symbolic", "action": {"type": "keys", "keys": "alt+Right"}},
+        {"label": "Reload", "icon": "view-refresh-symbolic", "action": {"type": "keys", "keys": "ctrl+r"}},
+        {"label": "New Tab", "icon": "tab-new-symbolic", "action": {"type": "keys", "keys": "ctrl+t"}},
+        {"label": "Close Tab", "icon": "window-close-symbolic", "action": {"type": "keys", "keys": "ctrl+w"}},
+        {"label": "Reopen Closed Tab", "icon": "edit-undo-symbolic", "action": {"type": "keys", "keys": "ctrl+shift+t"}},
+        {"label": "Reset Zoom", "icon": "zoom-original-symbolic", "action": {"type": "keys", "keys": "ctrl+0"}}
+      ],
+      "modes": [
+        {"id": "scroll", "label": "Scroll", "icon": "input-mouse-symbolic", "rotate": {"type": "scroll"}},
+        {"id": "tabs", "label": "Tabs", "icon": "dial-tabs-symbolic",
+         "cw": {"type": "keys", "keys": "ctrl+Page_Down"}, "ccw": {"type": "keys", "keys": "ctrl+Page_Up"}},
+        {"id": "zoom", "label": "Zoom", "icon": "zoom-in-symbolic",
+         "cw": {"type": "keys", "keys": "ctrl+plus"}, "ccw": {"type": "keys", "keys": "ctrl+minus"}}
+      ],
+      "click": {"type": "keys", "keys": "ctrl+r"}
+    },
+    {
+      "id": "vscode",
+      "name": "Visual Studio Code",
+      "match": {"appIds": ["code_code", "code", "com.visualstudio.code"], "wmClass": "^code$"},
+      "ring": [
+        {"label": "Run", "icon": "media-playback-start-symbolic", "action": {"type": "keys", "keys": "ctrl+F5"}},
+        {"label": "Debug", "icon": "dial-debug-symbolic", "action": {"type": "keys", "keys": "F5"}},
+        {"label": "Stop", "icon": "media-playback-stop-symbolic", "action": {"type": "keys", "keys": "shift+F5"}},
+        {"label": "Git: Sync", "icon": "dial-git-sync-symbolic", "action": {"type": "sequence", "actions": [
+          {"type": "keys", "keys": "ctrl+shift+p"}, {"type": "delay", "ms": 250},
+          {"type": "text", "text": "Git: Sync"}, {"type": "delay", "ms": 250},
+          {"type": "keys", "keys": "Return"}]}},
+        {"label": "Format Document", "icon": "format-justify-left-symbolic", "action": {"type": "keys", "keys": "ctrl+shift+i"}},
+        {"label": "Terminal", "icon": "utilities-terminal-symbolic", "action": {"type": "keys", "keys": "ctrl+grave"}},
+        {"label": "Quick Open", "icon": "edit-find-symbolic", "action": {"type": "keys", "keys": "ctrl+p"}}
+      ],
+      "modes": [
+        {"id": "scroll", "label": "Scroll", "icon": "input-mouse-symbolic", "rotate": {"type": "scroll"}},
+        {"id": "tabs", "label": "Tabs", "icon": "dial-tabs-symbolic",
+         "cw": {"type": "keys", "keys": "ctrl+Page_Down"}, "ccw": {"type": "keys", "keys": "ctrl+Page_Up"}},
+        {"id": "zoom", "label": "Zoom", "icon": "zoom-in-symbolic",
+         "cw": {"type": "keys", "keys": "ctrl+equal"}, "ccw": {"type": "keys", "keys": "ctrl+minus"}}
+      ],
+      "click": {"type": "keys", "keys": "ctrl+p"}
+    },
+    {
+      "id": "spotify",
+      "name": "Spotify",
+      "match": {"appIds": ["spotify_spotify", "spotify", "com.spotify.Client"], "wmClass": "^spotify"},
+      "ring": [
+        {"label": "Play / Pause", "icon": "media-playback-start-symbolic", "action": {"type": "mpris", "method": "PlayPause", "player": "spotify"}},
+        {"label": "Next", "icon": "media-skip-forward-symbolic", "action": {"type": "mpris", "method": "Next", "player": "spotify"}},
+        {"label": "Previous", "icon": "media-skip-backward-symbolic", "action": {"type": "mpris", "method": "Previous", "player": "spotify"}},
+        {"label": "Shuffle", "icon": "media-playlist-shuffle-symbolic", "action": {"type": "mpris", "method": "ToggleShuffle", "player": "spotify"}},
+        {"label": "Mute", "icon": "audio-volume-muted-symbolic", "action": {"type": "mute"}}
+      ],
+      "modes": [
+        {"id": "volume", "label": "Volume", "icon": "audio-volume-high-symbolic", "rotate": {"type": "mpris-volume", "player": "spotify"}},
+        {"id": "seek", "label": "Seek", "icon": "media-seek-forward-symbolic", "rotate": {"type": "mpris-seek", "seconds": 5, "player": "spotify"}}
+      ],
+      "click": {"type": "mpris", "method": "PlayPause", "player": "spotify"}
+    },
+    {
+      "id": "video",
+      "name": "Video Player",
+      "match": {"appIds": ["mpv", "io.mpv.Mpv", "org.gnome.Showtime"], "wmClass": "^(mpv|showtime|org\\.gnome\\.Showtime)$"},
+      "ring": [
+        {"label": "Play / Pause", "icon": "media-playback-start-symbolic", "action": {"type": "keys", "keys": "space"}},
+        {"label": "Forward 30 s", "icon": "media-seek-forward-symbolic", "action": {"type": "mpris", "method": "Seek", "seconds": 30, "fallback": {"type": "keys", "keys": "Up"}}},
+        {"label": "Back 30 s", "icon": "media-seek-backward-symbolic", "action": {"type": "mpris", "method": "Seek", "seconds": -30, "fallback": {"type": "keys", "keys": "Down"}}},
+        {"label": "Fullscreen", "icon": "view-fullscreen-symbolic", "action": {"type": "keys", "keys": "f"}},
+        {"label": "Mute", "icon": "audio-volume-muted-symbolic", "action": {"type": "mute"}}
+      ],
+      "modes": [
+        {"id": "seek", "label": "Seek", "icon": "media-seek-forward-symbolic",
+         "cw": {"type": "keys", "keys": "Right"}, "ccw": {"type": "keys", "keys": "Left"}},
+        {"id": "volume", "label": "Volume", "icon": "audio-volume-high-symbolic", "rotate": {"type": "volume"}}
+      ],
+      "click": {"type": "keys", "keys": "space"}
+    },
+    {
+      "id": "ptyxis",
+      "name": "Terminal",
+      "match": {"appIds": ["org.gnome.Ptyxis", "org.gnome.Console"], "wmClass": "ptyxis"},
+      "ring": [
+        {"label": "New Tab", "icon": "tab-new-symbolic", "action": {"type": "keys", "keys": "ctrl+shift+t"}},
+        {"label": "Close Tab", "icon": "window-close-symbolic", "action": {"type": "keys", "keys": "ctrl+shift+w"}},
+        {"label": "Copy", "icon": "edit-copy-symbolic", "action": {"type": "keys", "keys": "ctrl+shift+c"}},
+        {"label": "Paste", "icon": "edit-paste-symbolic", "action": {"type": "keys", "keys": "ctrl+shift+v"}},
+        {"label": "Find", "icon": "edit-find-symbolic", "action": {"type": "keys", "keys": "ctrl+shift+f"}},
+        {"label": "Reset Zoom", "icon": "zoom-original-symbolic", "action": {"type": "keys", "keys": "ctrl+0"}}
+      ],
+      "modes": [
+        {"id": "scroll", "label": "Scroll", "icon": "input-mouse-symbolic", "rotate": {"type": "scroll"}},
+        {"id": "tabs", "label": "Tabs", "icon": "dial-tabs-symbolic",
+         "cw": {"type": "keys", "keys": "ctrl+Page_Down"}, "ccw": {"type": "keys", "keys": "ctrl+Page_Up"}},
+        {"id": "zoom", "label": "Zoom", "icon": "zoom-in-symbolic",
+         "cw": {"type": "keys", "keys": "ctrl+plus"}, "ccw": {"type": "keys", "keys": "ctrl+minus"}}
+      ],
+      "click": {"type": "keys", "keys": "ctrl+shift+v"}
+    },
+    {
+      "id": "nautilus",
+      "name": "Files",
+      "match": {"appIds": ["org.gnome.Nautilus"], "wmClass": "nautilus"},
+      "ring": [
+        {"label": "Back", "icon": "go-previous-symbolic", "action": {"type": "keys", "keys": "alt+Left"}},
+        {"label": "Forward", "icon": "go-next-symbolic", "action": {"type": "keys", "keys": "alt+Right"}},
+        {"label": "Parent Folder", "icon": "go-up-symbolic", "action": {"type": "keys", "keys": "alt+Up"}},
+        {"label": "New Folder", "icon": "folder-new-symbolic", "action": {"type": "keys", "keys": "ctrl+shift+n"}},
+        {"label": "Hidden Files", "icon": "view-reveal-symbolic", "action": {"type": "keys", "keys": "ctrl+h"}},
+        {"label": "Grid View", "icon": "view-grid-symbolic", "action": {"type": "keys", "keys": "ctrl+1"}},
+        {"label": "List View", "icon": "view-list-symbolic", "action": {"type": "keys", "keys": "ctrl+2"}}
+      ],
+      "modes": [
+        {"id": "scroll", "label": "Scroll", "icon": "input-mouse-symbolic", "rotate": {"type": "scroll"}},
+        {"id": "zoom", "label": "Zoom", "icon": "zoom-in-symbolic",
+         "cw": {"type": "keys", "keys": "ctrl+plus"}, "ccw": {"type": "keys", "keys": "ctrl+minus"}}
+      ],
+      "click": {"type": "keys", "keys": "alt+Left"}
+    },
+    {
+      "id": "gimp",
+      "name": "GIMP",
+      "match": {"appIds": ["gimp_gimp", "gimp", "org.gimp.GIMP"], "wmClass": "^gimp"},
+      "ring": [
+        {"label": "Undo", "icon": "edit-undo-symbolic", "action": {"type": "keys", "keys": "ctrl+z"}},
+        {"label": "Redo", "icon": "edit-redo-symbolic", "action": {"type": "keys", "keys": "ctrl+y"}},
+        {"label": "Paintbrush", "icon": "dial-brush-symbolic", "action": {"type": "keys", "keys": "p"}},
+        {"label": "Eraser", "icon": "edit-clear-all-symbolic", "action": {"type": "keys", "keys": "shift+e"}},
+        {"label": "Swap Colors", "icon": "object-flip-horizontal-symbolic", "action": {"type": "keys", "keys": "x"}},
+        {"label": "Fit Image", "icon": "zoom-fit-best-symbolic", "action": {"type": "keys", "keys": "ctrl+shift+j"}}
+      ],
+      "modes": [
+        {"id": "brush", "label": "Brush Size", "icon": "dial-brush-symbolic",
+         "cw": {"type": "keys", "keys": "bracketright"}, "ccw": {"type": "keys", "keys": "bracketleft"}},
+        {"id": "zoom", "label": "Zoom", "icon": "zoom-in-symbolic", "rotate": {"type": "scroll", "modifiers": "ctrl"}},
+        {"id": "scroll", "label": "Scroll", "icon": "input-mouse-symbolic", "rotate": {"type": "scroll"}}
+      ],
+      "click": {"type": "keys", "keys": "ctrl+z"}
+    },
+    {
+      "id": "libreoffice",
+      "name": "LibreOffice",
+      "match": {"appId": "^libreoffice", "wmClass": "^(libreoffice|soffice)"},
+      "ring": [
+        {"label": "Undo", "icon": "edit-undo-symbolic", "action": {"type": "keys", "keys": "ctrl+z"}},
+        {"label": "Redo", "icon": "edit-redo-symbolic", "action": {"type": "keys", "keys": "ctrl+y"}},
+        {"label": "Bold", "icon": "format-text-bold-symbolic", "action": {"type": "keys", "keys": "ctrl+b"}},
+        {"label": "Italic", "icon": "format-text-italic-symbolic", "action": {"type": "keys", "keys": "ctrl+i"}},
+        {"label": "Underline", "icon": "format-text-underline-symbolic", "action": {"type": "keys", "keys": "ctrl+u"}},
+        {"label": "Save", "icon": "document-save-symbolic", "action": {"type": "keys", "keys": "ctrl+s"}}
+      ],
+      "modes": [
+        {"id": "scroll", "label": "Scroll", "icon": "input-mouse-symbolic", "rotate": {"type": "scroll"}},
+        {"id": "zoom", "label": "Zoom", "icon": "zoom-in-symbolic", "rotate": {"type": "scroll", "modifiers": "ctrl"}}
+      ],
+      "click": {"type": "keys", "keys": "ctrl+z"}
+    }
+  ]
+}

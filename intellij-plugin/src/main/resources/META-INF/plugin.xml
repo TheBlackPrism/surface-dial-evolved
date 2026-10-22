@@ -1,0 +1,23 @@
+<idea-plugin require-restart="false">
+  <id>ch.theblackprism.surface-dial</id>
+  <name>Surface Dial Bridge</name>
+  <vendor email="me@theblackprism.ch">The Black Prism</vendor>
+  <description><![CDATA[
+    Companion plugin for the <b>Surface Dial Evolved</b> GNOME Shell extension.
+    Exposes a small, token-protected HTTP API on IntelliJ's built-in server
+    (<code>http://127.0.0.1:63342/api/dial/...</code>) so the Surface Dial can run IDE actions by ID.
+    <ul>
+      <li><code>GET /api/dial/ping</code></li>
+      <li><code>GET /api/dial/action?id=&lt;ActionId&gt;</code></li>
+    </ul>
+    Requests must carry the <code>X-Dial-Token</code> header matching
+    <code>~/.config/surface-dial-evolved/intellij-token</code>; browser requests (with an Origin header) are rejected.
+  ]]></description>
+
+  <depends>com.intellij.modules.platform</depends>
+
+  <extensions defaultExtensionNs="com.intellij">
+    <!-- RestService subclasses are registered on the httpRequestHandler EP (there is no separate restService EP). -->
+    <httpRequestHandler implementation="ch.theblackprism.dial.DialRestService"/>
+  </extensions>
+</idea-plugin>

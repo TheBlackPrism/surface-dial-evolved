@@ -1,0 +1,4 @@
+# Surface Dial Evolved: give the logged-in user access to the Surface Dial.
+# The GNOME Shell extension reads the evdev node; the haptics helper talks to hidraw.
+SUBSYSTEM=="input", KERNEL=="event*", ATTRS{name}=="Surface Dial System*", TAG+="uaccess"
+SUBSYSTEM=="hidraw", KERNELS=="*:045E:091B.*", TAG+="uaccess"

@@ -1,0 +1,9 @@
+{
+  "uuid": "surface-dial-evolved@theblackprism.ch",
+  "name": "Surface Dial Evolved",
+  "description": "Brings the Microsoft Surface Dial to GNOME. Press and hold the dial to open a radial menu with actions for the focused application (IntelliJ IDEA, SourceGit, Firefox, VS Code, media players, …); rotate and click without the menu to scroll, zoom or change the volume depending on the application.",
+  "shell-version": ["49", "50"],
+  "url": "https://github.com/TheBlackPrism/surface-dial-evolved",
+  "settings-schema": "org.gnome.shell.extensions.surface-dial-evolved",
+  "version-name": "0.1.0"
+}
