@@ -57,6 +57,32 @@ function spinRow(settings, key, title, subtitle, lower, upper, step) {
     return row;
 }
 
+/**
+ * A drop-down bound to a string setting with choices.
+ *
+ * @param {Gio.Settings} settings settings
+ * @param {string} key key of the setting
+ * @param {string} title title of the row
+ * @param {string} subtitle subtitle of the row
+ * @param {[string, string][]} choices pairs of setting value and label
+ * @returns {Adw.ComboRow} the row
+ */
+function comboRow(settings, key, title, subtitle, choices) {
+    const row = new Adw.ComboRow({title, subtitle, model: Gtk.StringList.new(choices.map(([, label]) => label))});
+    const sync = () => {
+        row.selected = Math.max(0, choices.findIndex(([value]) => value === settings.get_string(key)));
+    };
+    sync();
+    const changedId = settings.connect(`changed::${key}`, sync);
+    row.connect('destroy', () => settings.disconnect(changedId));
+    row.connect('notify::selected', () => {
+        const [value] = choices[row.selected] ?? [];
+        if (value && value !== settings.get_string(key))
+            settings.set_string(key, value);
+    });
+    return row;
+}
+
 function switchRow(settings, key, title, subtitle) {
     const row = new Adw.SwitchRow({title, subtitle});
     settings.bind(key, row, 'active', Gio.SettingsBindFlags.DEFAULT);
@@ -77,7 +103,12 @@ export default class SurfaceDialPreferences extends ExtensionPreferences {
         refresh.connect('clicked', () => status.set_subtitle(dialStatus()));
         status.add_suffix(refresh);
         device.add(status);
-        device.add(switchRow(settings, 'haptics', 'Haptic Feedback', 'Click on every step of the dial'));
+        device.add(switchRow(settings, 'haptics', 'Haptic Feedback', 'Feel every step of the dial'));
+        const strength = comboRow(settings, 'haptic-strength', 'Strength',
+            'Normal clicks on every step, Strong buzzes',
+            [['normal', 'Normal'], ['strong', 'Strong']]);
+        settings.bind('haptics', strength, 'sensitive', Gio.SettingsBindFlags.GET);
+        device.add(strength);
         device.add(spinRow(settings, 'steps-per-turn', 'Steps per Turn',
             'How many steps one full turn of the dial has', 12, 120, 1));
         page.add(device);

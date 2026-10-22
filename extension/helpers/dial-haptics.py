@@ -5,9 +5,9 @@
 
 GJS cannot issue ioctls, so the GNOME Shell extension runs this helper:
 
-    dial-haptics.py /dev/hidrawN mode STEPS on|off
+    dial-haptics.py /dev/hidrawN mode STEPS off|click|buzz|rumble
         Sets the resolution to STEPS per revolution (REL_DIAL then reports
-        one unit per step) and whether the dial clicks on every step.
+        one unit per step) and the waveform played on every step.
     dial-haptics.py /dev/hidrawN buzz click|buzz|rumble [REPEAT]
         Plays a waveform once (plus REPEAT repetitions).
 
@@ -16,6 +16,7 @@ Report layout from the dial's HID report descriptor, report ID 1:
              auto trigger (u8), waveform cutoff time (u8), retrigger period (u16)
     output:  repeat count (u8), manual trigger (u8), retrigger period (u16)
 Waveform ordinals: 2 = stop/none, 3 = click, 4 = buzz, 5 = rumble.
+The descriptor has no intensity usage; buzz is the one that feels stronger.
 """
 
 import fcntl
@@ -32,8 +33,8 @@ def hidiocsfeature(length):
     return (3 << 30) | (length << 16) | (ord("H") << 8) | 0x06
 
 
-def set_mode(fd, steps, haptics):
-    report = struct.pack("<BHBBBH", 1, steps, 0, WAVEFORMS["click"] if haptics else WAVEFORM_NONE, 0, 0)
+def set_mode(fd, steps, waveform):
+    report = struct.pack("<BHBBBH", 1, steps, 0, WAVEFORMS.get(waveform, WAVEFORM_NONE), 0, 0)
     fcntl.ioctl(fd, hidiocsfeature(len(report)), bytearray(report))
 
 
@@ -45,13 +46,15 @@ def main(argv):
     if len(argv) < 3:
         sys.exit(__doc__)
     path, command, args = argv[1], argv[2], argv[3:]
+    # "on" is what versions before haptic-strength sent.
+    args = ["click" if command == "mode" and a == "on" else a for a in args]
     fd = os.open(path, os.O_RDWR)
     try:
-        if command == "mode" and len(args) == 2 and args[1] in ("on", "off"):
+        if command == "mode" and len(args) == 2 and (args[1] == "off" or args[1] in WAVEFORMS):
             steps = int(args[0])
             if not 1 <= steps <= 3600:
                 sys.exit("STEPS must be between 1 and 3600")
-            set_mode(fd, steps, args[1] == "on")
+            set_mode(fd, steps, args[1])
         elif command == "buzz" and 1 <= len(args) <= 2 and args[0] in WAVEFORMS:
             buzz(fd, args[0], int(args[1]) if len(args) == 2 else 0)
         else:

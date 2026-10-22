@@ -8,6 +8,7 @@ import System from 'system';
 
 import {EVENT_SIZE, decodeEvents, dialInput, EV_KEY, EV_REL, EV_SYN, BTN_0, REL_DIAL} from '../extension/lib/evdev.js';
 import {GestureRecognizer} from '../extension/lib/gestures.js';
+import {stepWaveform} from '../extension/lib/haptics.js';
 import {mergeProfiles, parseKeyCombo, profileMatches, resolveProfile} from '../extension/lib/profiles.js';
 
 const tests = [];
@@ -185,6 +186,12 @@ test('parses key combinations', () => {
         threw = true;
     }
     assertEqual(threw, true, 'unknown modifier');
+});
+
+test('maps haptic settings to step waveforms', () => {
+    assertEqual(stepWaveform(true, 'normal'), 'click');
+    assertEqual(stepWaveform(true, 'strong'), 'buzz');
+    assertEqual(stepWaveform(false, 'strong'), null, 'off');
 });
 
 let failed = 0;

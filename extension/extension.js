@@ -19,7 +19,7 @@ import {ActionRunner} from './lib/actions.js';
 import {focusedWindow} from './lib/context.js';
 import {DialDevice} from './lib/device.js';
 import {GestureRecognizer} from './lib/gestures.js';
-import {Haptics} from './lib/haptics.js';
+import {Haptics, stepWaveform} from './lib/haptics.js';
 import {completeProfile, mergeProfiles, resolveProfile} from './lib/profiles.js';
 import {ModeToast, Ring} from './lib/ring.js';
 
@@ -113,6 +113,7 @@ export default class SurfaceDialExtension extends Extension {
             },
             'changed::steps-per-turn', () => this._configureDial(),
             'changed::haptics', () => this._configureDial(),
+            'changed::haptic-strength', () => this._configureDial(),
             this);
         global.display.connectObject('notify::focus-window', () => this._closeRing(), this);
 
@@ -164,12 +165,17 @@ export default class SurfaceDialExtension extends Extension {
         this._profiles = mergeProfiles(builtin, user);
     }
 
+    _stepWaveform() {
+        return stepWaveform(this._settings.get_boolean('haptics'),
+            this._settings.get_string('haptic-strength'));
+    }
+
     // Sets the dial's resolution to the configured steps per turn, so that
-    // every REL_DIAL unit is one step and the haptic clicks line up with
+    // every REL_DIAL unit is one step and the haptic feedback lines up with
     // steps. Without haptics access the native resolution is divided instead.
     async _configureDial() {
         const steps = this._settings.get_uint('steps-per-turn');
-        const configured = await this._haptics.configure(steps, this._settings.get_boolean('haptics'));
+        const configured = await this._haptics.configure(steps, this._stepWaveform());
         if (this._gestures)
             this._gestures.unitsPerStep = configured ? 1 : NATIVE_UNITS_PER_TURN / steps;
     }
@@ -213,7 +219,9 @@ export default class SurfaceDialExtension extends Extension {
                 this._ring = null;
         });
         this._ring.open();
-        this._haptics.buzz('click');
+        const waveform = this._stepWaveform();
+        if (waveform)
+            this._haptics.buzz(waveform);
         this._restartRingTimeout();
     }
 

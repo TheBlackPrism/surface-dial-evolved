@@ -29,7 +29,16 @@
     <key name="haptics" type="b">
       <default>true</default>
       <summary>Haptic feedback</summary>
-      <description>Let the dial tick on every step while the ring is open.</description>
+      <description>Let the dial tick on every step.</description>
+    </key>
+    <key name="haptic-strength" type="s">
+      <choices>
+        <choice value="normal"/>
+        <choice value="strong"/>
+      </choices>
+      <default>'normal'</default>
+      <summary>Haptic strength</summary>
+      <description>“normal” clicks on every step, “strong” buzzes.</description>
     </key>
     <key name="debug" type="b">
       <default>false</default>

@@ -39,7 +39,7 @@ Surface Dial ──evdev/hidraw──▶ GNOME Shell extension ──HTTP + toke
   and scrolling through Mutter's virtual input devices, so no `/dev/uinput`
   access is needed.
 - `extension/helpers/dial-haptics.py` — sets the dial's steps per turn and
-  haptic clicks through a HID feature report (needs an ioctl, which GJS
+  haptic feedback (a click per step, or a stronger buzz) through a HID feature report (needs an ioctl, which GJS
   cannot do).
 - `intellij-plugin/` — "Surface Dial Bridge", a small IntelliJ plugin that
   runs actions by id on `http://127.0.0.1:63342/api/dial/action?id=…`. It

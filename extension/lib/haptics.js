@@ -8,6 +8,19 @@ import Gio from 'gi://Gio';
 
 Gio._promisify(Gio.Subprocess.prototype, 'communicate_utf8_async');
 
+/**
+ * The waveform the dial plays on every step.
+ *
+ * @param {boolean} enabled whether haptic feedback is on
+ * @param {string} strength `normal` or `strong`
+ * @returns {'click'|'buzz'|null} the waveform, null for none
+ */
+export function stepWaveform(enabled, strength) {
+    if (!enabled)
+        return null;
+    return strength === 'strong' ? 'buzz' : 'click';
+}
+
 /** Runs the haptics helper; calls are queued so they never overlap. */
 export class Haptics {
     /**
@@ -29,14 +42,14 @@ export class Haptics {
     }
 
     /**
-     * Sets steps per turn and whether each step clicks.
+     * Sets steps per turn and the waveform played on every step.
      *
      * @param {number} steps steps per full turn
-     * @param {boolean} clicks whether each step produces a haptic click
+     * @param {'click'|'buzz'|null} waveform waveform per step, null for none
      * @returns {Promise<boolean>} whether the dial accepted it
      */
-    configure(steps, clicks) {
-        return this._run(['mode', `${steps}`, clicks ? 'on' : 'off']);
+    configure(steps, waveform) {
+        return this._run(['mode', `${steps}`, waveform ?? 'off']);
     }
 
     /**
