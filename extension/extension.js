@@ -6,8 +6,8 @@
 // Press and hold the dial to open a ring of actions for the focused
 // application, turn to choose and click to run. With the ring closed,
 // turning applies the application's current rotate mode (scroll, zoom,
-// volume, …), pressing while turning switches between its modes, and a
-// click runs its click action. Profiles live in profiles/default.json and
+// volume, …) or, if so configured, opens the ring; pressing while turning
+// switches between its modes, and a click runs its click action. Profiles live in profiles/default.json and
 // can be overridden in ~/.config/surface-dial-evolved/profiles.json.
 
 import Gio from 'gi://Gio';
@@ -199,10 +199,20 @@ export default class SurfaceDialExtension extends Extension {
      * @param {string|null} profileId profile to show instead of the focused window's (development only)
      */
     _onHold(profileId = null) {
-        if (this._ring) {
+        if (this._ring)
             this._closeRing();
-            return;
-        }
+        else
+            this._openRing(profileId);
+    }
+
+    _turningOpensRing() {
+        return this._settings.get_string('rotate-action') === 'ring';
+    }
+
+    /**
+     * @param {string|null} profileId profile to show instead of the focused window's (development only)
+     */
+    _openRing(profileId = null) {
         const window = focusedWindow();
         const forced = profileId && this._profiles.find(p => p.id === profileId);
         const profile = forced
@@ -211,7 +221,7 @@ export default class SurfaceDialExtension extends Extension {
         this._ring = new Ring({
             profile,
             appIcon: window?.app?.get_icon() ?? null,
-            modeLabel: this._currentMode(profile)?.label ?? '',
+            modeLabel: this._turningOpensRing() ? '' : this._currentMode(profile)?.label ?? '',
             size: this._settings.get_uint('ring-size'),
             iconDir: this._iconDir,
         });
@@ -243,6 +253,11 @@ export default class SurfaceDialExtension extends Extension {
         if (this._ring) {
             this._ring.move(steps);
             this._restartRingTimeout();
+            return;
+        }
+        // The step that opens the ring does not move the selection yet.
+        if (this._turningOpensRing()) {
+            this._openRing();
             return;
         }
         const profile = this._currentProfile();

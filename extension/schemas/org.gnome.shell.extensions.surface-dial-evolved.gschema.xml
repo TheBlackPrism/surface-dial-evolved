@@ -14,6 +14,15 @@
       <summary>Steps per turn</summary>
       <description>Number of steps (and haptic clicks) in one full turn of the dial.</description>
     </key>
+    <key name="rotate-action" type="s">
+      <choices>
+        <choice value="mode"/>
+        <choice value="ring"/>
+      </choices>
+      <default>'mode'</default>
+      <summary>Turning the dial</summary>
+      <description>What turning does while the ring is closed: “mode” applies the application's rotate mode (scroll, zoom, volume, …), “ring” opens the ring.</description>
+    </key>
     <key name="ring-size" type="u">
       <default>300</default>
       <range min="200" max="600"/>

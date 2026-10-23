@@ -114,6 +114,9 @@ export default class SurfaceDialPreferences extends ExtensionPreferences {
         page.add(device);
 
         const ring = new Adw.PreferencesGroup({title: 'Ring'});
+        ring.add(comboRow(settings, 'rotate-action', 'Turning the Dial',
+            'What turning does while the ring is closed',
+            [['mode', 'Scroll, Zoom, Volume …'], ['ring', 'Opens the Ring']]));
         ring.add(spinRow(settings, 'hold-time', 'Hold Time',
             'Milliseconds to hold the dial down to open the ring', 150, 2000, 50));
         ring.add(spinRow(settings, 'ring-size', 'Size', 'Diameter of the ring in pixels', 200, 600, 10));

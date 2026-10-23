@@ -9,6 +9,9 @@ context-aware actions, rotate modes per application, and haptic feedback.
 - **Turn** without the ring: the application's current rotate mode —
   scroll, zoom, volume, seek, brush size, switch tabs, jump between methods …
 - **Press and turn**: switch between the application's rotate modes.
+- Prefer turning to open the ring? Set *Turning the Dial* to *Opens the Ring*
+  in the preferences; then the first step opens the ring and the next ones
+  choose.
 - **Click** without the ring: the application's click action.
 
 | Application | Ring | Rotate modes · click |
